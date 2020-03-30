@@ -272,6 +272,7 @@ EXPORT m64p_error CALL VidExt_SetVideoMode(int Width, int Height, int BitsPerPix
     l_VideoOutputActive = 1;
     StateChanged(M64CORE_VIDEO_MODE, ScreenMode);
     StateChanged(M64CORE_VIDEO_SIZE, (Width << 16) | Height);
+
     return M64ERR_SUCCESS;
 }
 

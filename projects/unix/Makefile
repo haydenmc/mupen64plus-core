@@ -396,6 +396,16 @@ ifeq ($(OSD), 1)
   LDLIBS += $(GLU_LDLIBS)
 endif
 
+# Gstreamer
+CFLAGS += $(shell $(PKG_CONFIG) --cflags gstreamer-1.0)
+LDLIBS += $(shell $(PKG_CONFIG) --libs gstreamer-1.0)
+
+CFLAGS += $(shell $(PKG_CONFIG) --cflags gstreamer-base-1.0)
+LDLIBS += $(shell $(PKG_CONFIG) --libs gstreamer-base-1.0)
+
+CFLAGS += $(shell $(PKG_CONFIG) --cflags gstreamer-gl-1.0)
+LDLIBS += $(shell $(PKG_CONFIG) --libs gstreamer-gl-1.0)
+
 # set base program pointers and flags
 CC        = $(CROSS_COMPILE)gcc
 CXX       = $(CROSS_COMPILE)g++
@@ -546,6 +556,7 @@ SOURCE = \
     $(SRCDIR)/plugin/dummy_audio.c \
     $(SRCDIR)/plugin/dummy_input.c \
     $(SRCDIR)/plugin/dummy_rsp.c \
+    $(SRCDIR)/stream/gststream.c \
     $(MINIZIP_SOURCE)
 
 # MD5 lib

@@ -21,6 +21,9 @@
 
 #include <SDL_config.h>
 #include <SDL_surface.h>
+#include <SDL_thread.h>
+
+#include "../stream/gststream.h"
 
 #ifndef USE_GLES
 
@@ -474,6 +477,7 @@ SDL_SetVideoMode(int width, int height, int bpp, Uint32 flags)
         if (SDL_GL_MakeCurrent(SDL_VideoWindow, SDL_VideoContext) < 0) {
             return NULL;
         }
+
         SDL_VideoSurface =
             SDL_CreateRGBSurfaceFrom(NULL, width, height, bpp, 0, 0, 0, 0, 0);
         if (!SDL_VideoSurface) {
@@ -481,6 +485,11 @@ SDL_SetVideoMode(int width, int height, int bpp, Uint32 flags)
         }
         SDL_VideoSurface->flags |= surface_flags;
         SDL_PublicSurface = SDL_VideoSurface;
+
+        // Let's start streaming!
+        SDL_CreateThread(startStream, "StreamingThread", SDL_VideoWindow);
+        //startStream(NULL);
+
         return SDL_PublicSurface;
     }
 

@@ -76,6 +76,7 @@
 #include "savestates.h"
 #include "screenshot.h"
 #include "util.h"
+#include "../stream/gststream.h"
 
 #ifdef DBG
 #include "debugger/dbg_debugger.h"
@@ -763,6 +764,8 @@ static void video_plugin_render_callback(int bScreenRedrawn)
     {
         input.renderCallback();
     }
+
+    // TODO: Render to streaming texture
 }
 
 void new_frame(void)
